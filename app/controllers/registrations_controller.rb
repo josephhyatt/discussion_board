@@ -1,5 +1,5 @@
 # hooks into devise. kind of a child of devise that depends on registrations controller in devise.
-class RegistrationsController < Devise::RegistrationController 
+class RegistrationsController < Devise::RegistrationsController 
 
   private
   # part of devise 
