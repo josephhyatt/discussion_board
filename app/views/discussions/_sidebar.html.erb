@@ -10,8 +10,10 @@ if youre an admin then display a 'New Channel' button -->
   </ul>
 
   <br/>
-  
+
   <!-- admine role -->
-  <%= link_to 'New Channel', new_channel_path, class:'button is-info' %>
+  <% if current_user && current_user.admin %>
+    <%= link_to 'New Channel', new_channel_path, class:'button is-info' %>
+  <% end %>
 
 </div>

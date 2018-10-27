@@ -3,7 +3,7 @@
 
   <div class="field">
     <div class="control">
-      
+
       <%= f.input :title, required: true, input_html: { class: 'input' }, wrapper: false, label_html: { class: "label" } %>
     </div>
   </div>
@@ -18,8 +18,15 @@
     <label class="label">Channel</label>
     <div class="control has-icons-left">
       <span class="select">
-        <%= f.input_field :channel_id, collection:@channels.map { |c| [c.channel, c.id] }, prompt: "Select channel" %>
+        <!-- in simple_form you can classify a select field as a collection
+        and pass through the index method on discussions_controller.rb
+        which calls the private method find_channels which finds all the channels 
+        and for each one we are going to get the associated i.d. plus name. 
+        using an array were mapping through each channel to each one of the channels
+        thats exists. then calling a default prompt on the select field -->
+        <%= f.input_field :channel_id, collection: @channels.map { |c| [c.channel, c.id] }, prompt: "Select channel" %>
       </span>
+      <!-- icon for -->
       <span class="icon is-small is-left">
         <i class="fa fa-tag"></i>
       </span>
