@@ -7,7 +7,7 @@ class RepliesController < ApplicationController
     # find reply on discussion through discussion i.d. in set_discussion 
     # using the replies create method passing in params of reply and permitting it
     # as well as the discussion i.d. (allows us to create a reply within the discussion) 
-    @reply = @discussion.replies.create(params[:reply]).permit(:reply, :discussion_id)
+    @reply = @discussion.replies.create(params[:reply].permit(:reply, :discussion_id))
     # i added a user_id column to the replies table
     # so this sets user_id of the reply created equal to the currnt_user_id and 
     # make that equal to the current user 
@@ -18,11 +18,9 @@ class RepliesController < ApplicationController
       if @reply.save
         # redirect to discussion_path and pass in @discussion which
         # grabs the discussion_id, using the set_discussion method below private
-        format.html { redirect_to discussion_path(@discussion) }
-        format.js #render create.js.erb
+        redirect_to discussion_path(@discussion) 
       else
-        format.html {redirect_to discussion_path(@discussion), notice: 'Reply did not save. Try again..' }
-        format.js #render create.js.erb
+        redirect_to discussion_path(@discussion), notice: 'Reply did not save. Try again..' 
       end
     end
   end
@@ -79,6 +77,4 @@ class RepliesController < ApplicationController
     params.require(:reply).permit(:reply)
   end
 
-
-  
 end

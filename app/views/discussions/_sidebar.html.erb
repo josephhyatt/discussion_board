@@ -11,7 +11,7 @@ if youre an admin then display a 'New Channel' button -->
 
   <br/>
 
-  <!-- admine role -->
+  <!-- if user is admin then show New Channel button -->
   <% if current_user && current_user.admin %>
     <%= link_to 'New Channel', new_channel_path, class:'button is-info' %>
   <% end %>

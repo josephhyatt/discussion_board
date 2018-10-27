@@ -25,18 +25,23 @@ class ChannelsController < ApplicationController
   def create 
     @channel = Channel.new(channel_params)
     if @channel.save 
-      redirect_to channel_path, notice: 'Channel was successfully created'
+      redirect_to channels_path, notice: 'Channel was successfully created'
     else
-      render 'show'
+      render 'new'
     end
   end
 
   def update
     if @channel.update(channel_params)
-      redirect_to channel_path, notice: 'Channel was successfully updated'
+      redirect_to channels_path, notice: 'Channel was successfully updated'
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    @channel.destroy
+    redirect_to channels_url, notice: 'Channel was successfully destroyed.' 
   end
 
   private

@@ -4,7 +4,6 @@ class DiscussionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   
   def index
-    @channels = Channel.all
     @discussions = Discussion.all.order('created_at desc')
   end
 
@@ -23,7 +22,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = current_user.discussions.build(discussion_params)
     if @discussion.save
-      redirect_to discussion_path(@discussion), notice: 'Discussion was successfully created.' 
+      redirect_to @discussion, notice: 'Discussion was successfully created.' 
     else
       render 'new'
     end
