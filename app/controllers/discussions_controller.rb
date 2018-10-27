@@ -14,20 +14,39 @@ class DiscussionsController < ApplicationController
 
   def new
     # look for current user and access discussions and build (look up build)  
-    @discussions = curent_user.discussions.build
+    @discussions = current_user.discussions.build
   end 
 
   def edit
   end
 
-  def create 
-    @discussions = curent_user.discussions.build(discussion_params)
-  end 
+  def create
+    @discussion = current_user.discussions.build(discussion_params)
 
-  def update  
+    respond_to do |format|
+      if @discussion.save
+        redirect_to discussion_path(@discussion), notice: 'Discussion was successfully created.' 
+      else
+        render 'new'
+      end
+    end
   end
 
-  def destroy  
+  def update
+    respond_to do |format|
+      if @discussion.update(discussion_params)
+        redirect_to discussion_path(@discussion), notice: 'Discussion was successfully updated.' 
+      else
+        render 'edit'
+      end
+    end
+  end
+
+  def destroy
+    @discussion.destroy
+    respond_to do |format|
+      redirect_to discussion_path(@discussion), notice: 'Discussion was successfully destroyed.' 
+    end
   end
 
   private
