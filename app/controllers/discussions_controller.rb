@@ -25,25 +25,21 @@ class DiscussionsController < ApplicationController
     if @discussion.save
       redirect_to discussion_path(@discussion), notice: 'Discussion was successfully created.' 
     else
-      render 'show'
+      render 'new'
     end
   end
 
   def update
-    respond_to do |format|
-      if @discussion.update(discussion_params)
-        redirect_to discussion_path(@discussion), notice: 'Discussion was successfully updated.' 
-      else
-        render 'edit'
-      end
+    if @discussion.update(discussion_params)
+      redirect_to channel_path(@discussion), notice: 'Discussion was successfully updated.' 
+    else
+      render 'edit'
     end
   end
 
   def destroy
     @discussion.destroy
-    respond_to do |format|
-      redirect_to discussion_path(@discussion), notice: 'Discussion was successfully destroyed.' 
-    end
+    redirect_to discussion_path(@discussion), notice: 'Discussion was successfully destroyed.' 
   end
 
   private

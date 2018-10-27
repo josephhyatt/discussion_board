@@ -7,12 +7,12 @@ class ChannelsController < ApplicationController
   end
 
   def show
-    # querry through all channels
-    @channels = Channel.all
     # find discussion where the channel_id matches channels actual i.d.
     # for the discussion table I created a channel i.d. and need those two to match
     # if the i.d.s match up then that means they correspond and relate to each other
     @discussions = Discussion.where('channel_id = ?', @channel.id) 
+    # querry through all channels
+    @channels = Channel.all
   end
 
   def new
@@ -25,15 +25,15 @@ class ChannelsController < ApplicationController
   def create 
     @channel = Channel.new(channel_params)
     if @channel.save 
-      redirect_to channels_path, notice: 'Channel was successfully created'
+      redirect_to channel_path, notice: 'Channel was successfully created'
     else
-      render 'new'
+      render 'show'
     end
   end
 
   def update
     if @channel.update(channel_params)
-      redirect_to channels_path, notice: 'Channel was successfully updated'
+      redirect_to channel_path, notice: 'Channel was successfully updated'
     else
       render 'edit'
     end
