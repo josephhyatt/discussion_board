@@ -38,7 +38,7 @@ class RepliesController < ApplicationController
 
   def edit
     # finds the discussion i.d. youre wanting to edit
-    @discussion = Discussion.find(params[:id])
+    @discussion = Discussion.find(params[:discussion_id])
     # corresponds to the discussion i.d. finding
     # all replys then finds the one that associates
     # itself with the current i.d.

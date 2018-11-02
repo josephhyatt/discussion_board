@@ -2,7 +2,7 @@ class DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :edit, :update, :destroy]
   before_action :find_channels, only: [:index, :show, :new, :edit]
   before_action :authenticate_user!, except: [:index, :show]
-  
+
   def index
     @discussions = Discussion.all.order('created_at desc')
   end
@@ -12,9 +12,9 @@ class DiscussionsController < ApplicationController
   end
 
   def new
-    # look for current user and access discussions and build (look up build)  
+    # look for current user and access discussions and build (look up build)
     @discussion = current_user.discussions.build
-  end 
+  end
 
   def edit
   end
@@ -22,7 +22,7 @@ class DiscussionsController < ApplicationController
   def create
     @discussion = current_user.discussions.build(discussion_params)
     if @discussion.save
-      redirect_to @discussion, notice: 'Discussion was successfully created.' 
+      redirect_to @discussion, notice: 'Discussion was successfully created.'
     else
       render 'new'
     end
@@ -30,15 +30,15 @@ class DiscussionsController < ApplicationController
 
   def update
     if @discussion.update(discussion_params)
-      redirect_to channel_path(@discussion), notice: 'Discussion was successfully updated.' 
+      redirect_to @discussion, notice: 'Discussion was successfully updated.'
     else
-      render 'edit'
+      render 'show'
     end
   end
 
   def destroy
     @discussion.destroy
-    redirect_to discussion_path(@discussion), notice: 'Discussion was successfully destroyed.' 
+    redirect_to discussion_path(@discussion), notice: 'Discussion was successfully destroyed.'
   end
 
   private

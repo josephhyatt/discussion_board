@@ -16,7 +16,7 @@
             <h3 class="title is-5"><%= discussion.title %></h3>
           <% end %>
           <div class="content">
-            <!-- cut off string and strip markdown if content is 140 or above -->
+            <!-- cut off string and strips markdown if content is 140 or above -->
             <%= truncate(strip_markdown(discussion.content), length: 140) %>
             <!-- link_to that channel. messed up here, im linking to the channel
             but its also called channel in the database, change to channel_name  -->
