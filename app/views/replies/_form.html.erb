@@ -1,11 +1,17 @@
+<!-- a form that calls for a discussion i.d. and discussion replies thats being created through this form -->
+<!-- remote: true is an AJAX perameter which doesn't require the entire page to reload when a person comments
+appearing instantly on screen when submitted -->
 <%= simple_form_for([@discussion, @discussion.replies.build], remote: true) do |f| %>
-
+<!-- one field for the reply -->
 <div class="field">
   <div class="control">
+    <!-- creating input for reply, passing in an input_html atribute which passes any html straight to the input
+    with a input type 'textarea' with no wrapper (which simple_form generates a wrapper
+    div around your label by default)  -->
     <%= f.input :reply, input_html: { class: 'textarea' }, wrapper: false, label_html: { class: 'label' } %>
   </div>
 </div>
-
+<!-- creating a submit button with label 'Leave a reply' with bootstrap class -->
 <%= f.button :submit, 'Leave a reply', class:'button is-info' %>
 
 <% end %>

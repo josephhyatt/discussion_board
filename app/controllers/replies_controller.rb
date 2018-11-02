@@ -4,45 +4,44 @@ class RepliesController < ApplicationController
   before_action :set_discussion, only: [:create, :edit, :show, :update, :destroy]
 
   def create
-    # find reply on discussion through discussion i.d. in set_discussion 
+    # find reply on discussion through discussion i.d. in set_discussion
     # using the replies create method passing in params of reply and permitting it
-    # as well as the discussion i.d. (allows us to create a reply within the discussion) 
+    # as well as the discussion i.d. (allows us to create a reply within the discussion)
     @reply = @discussion.replies.create(params[:reply].permit(:reply, :discussion_id))
     # i added a user_id column to the replies table
-    # so this sets user_id of the reply created equal to the currnt_user_id and 
-    # make that equal to the current user 
+    # so this sets user_id of the reply created equal to the currnt_user_id and
+    # make that equal to the current user
     @reply.user_id = current_user.id
 
-    respond_to do |format|
-      # if the reply is saved render a format
-      if @reply.save
-        # redirect to discussion_path and pass in @discussion which
-        # grabs the discussion_id, using the set_discussion method below private
-        redirect_to discussion_path(@discussion) 
-      else
-        redirect_to discussion_path(@discussion), notice: 'Reply did not save. Try again..' 
-      end
+    # if the reply is saved render a format
+    if @reply.save
+      # redirect to discussion_path and pass in @discussion which
+      # grabs the discussion_id, using the set_discussion method below private
+      redirect_to discussion_path(@discussion)
+    else
+      redirect_to discussion_path(@discussion), notice: 'Reply did not save. Try again..'
     end
   end
+
 
   def new
   end
 
   def destroy
-    # makes the replay = to the discussions id 
+    # makes the replay = to the discussions id
     @reply = @discussion.replies.find(params[:id])
     # destroy reply
-    @reply.destroy 
+    @reply.destroy
     # redirect to discussion_path passing in @discussion
-    redirect_to disscussion_path(@discussion)
+    redirect_to discussion_path(@discussion)
   end
 
   def edit
-    # find the discussion youre wanting to edit  
+    # finds the discussion i.d. youre wanting to edit
     @discussion = Discussion.find(params[:id])
-    # using the discussion you found above find the replies on it
-    # and find the one with the associated i.d. that were editing
-    # (paramd[:id]) finds the ID and URL
+    # corresponds to the discussion i.d. finding
+    # all replys then finds the one that associates
+    # itself with the current i.d.
     @reply = @discussion.replies.find(params[:id])
   end
 
@@ -62,18 +61,18 @@ class RepliesController < ApplicationController
     end
   end
 
-  private 
+  private
 
-  def set_discussion 
-    # find discussion on the reply by discussion_id 
+  def set_discussion
+    # find discussion on the reply by discussion_id
     @discussion = Discussion.find(params[:discussion_id])
-  end 
+  end
 
-  def set_reply 
+  def set_reply
     @reply = Reply.find(params[:id])
-  end 
+  end
 
-  def reply_params 
+  def reply_params
     params.require(:reply).permit(:reply)
   end
 

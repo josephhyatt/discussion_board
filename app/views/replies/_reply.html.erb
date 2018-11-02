@@ -1,13 +1,17 @@
+<!-- this _partial works in the discussion show.html.erb and renders the replies -->
 <div class="box">
   <article class="media">
     <div class="media-left">
+      <!-- the replay box that appears when a user leaves a reply -->
       <figure class="image is-48x48">
+      <!-- shows an gravatar img tag of the user who replied on the discussion  -->
         <%= gravatar_image_tag(reply.user.email, class: 'border-radius-50', size: 48, alt: reply.user.username) %>
       </figure>
     </div>
     <div class="media-content">
       <div class="content">
         <p>
+          <!-- shows the username and the time they replied -->
           <strong><%= reply.user.username %></strong> <small><%= time_ago_in_words(reply.created_at) %></small>
           <br/>
           <%= markdown(reply.reply) %>
@@ -17,11 +21,14 @@
       <nav class="level is-mobile">
         <div class="level-left">
           <a class="level-item">
+            <!-- getting the reply discussion i.d. of user allowing them to edit their own reply -->
             <%= link_to edit_discussion_reply_path(reply.discussion, reply) do %>
             <span class="icon is-small"><i class="fa fa-pencil"></i></span>
             <% end %>
           </a>
           <a class="level-item">
+            <!-- passing an array requiring both reply and discussion i.d. in order to know where
+            to look in the database for a user to delete their reply -->
             <%= link_to [reply.discussion, reply],
                 method: :delete, data: {confirm: "Are you sure ?" } do %>
             <span class="icon is-small"><i class="fa fa-trash-o"></i></span>

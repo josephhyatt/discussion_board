@@ -18,6 +18,9 @@
     <h2 class="subtitle is-5 has-text-grey"><%= @discussion.replies.count %> Replies</h2>
 
     <div id="discussion-replies">
+      <!-- renders replies from the _reply.html.erb partial in view/replies folder -->
+      <!-- gets our discussion by the discussion i.d. and then
+      grabs all the replies on that i.d. -->
       <%= render @discussion.replies %>
     </div>
 
@@ -25,6 +28,7 @@
 
     <h3 class="subtitle is-3 has-text-grey">Leave a reply</h3>
     <% if user_signed_in? %>
+      <!-- renders from views/replies/_form.html.erb _partial -->
       <%= render 'replies/form' %>
     <% else %>
     <p>To reply you need to <%= link_to 'login', new_user_session_path %>. Don't have an account?
