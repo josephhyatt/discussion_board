@@ -4,7 +4,7 @@ module ApplicationHelper
   # render_strip is a plugin that strips markdown from
   # a field of text on the index (the root) page
   require 'redcarpet/render_strip'
-
+  # checks users role (using for admin privileges)
   def has_role?(role)
     current_user && current_user.has_role?(role)
   end

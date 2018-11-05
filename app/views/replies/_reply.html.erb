@@ -18,9 +18,9 @@
           <%= markdown(reply.reply) %>
         </p>
       </div>
-      <!-- checks that the user is the author of the reply
-      and if true shows the icons for user to edit/delete reply -->
-      <% if reply_author(reply) %>
+      <!-- if user is the author of the reply or is an admin
+      show icons for user or admin to edit/delete reply -->
+      <% if reply_author(reply) || has_role?(:admin) %>
         <nav class="level is-mobile">
           <div class="level-left">
             <a class="level-item">
