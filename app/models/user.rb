@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   # if a user is destroyed so is their discussions
   has_many :discussions, dependent: :destroy
-  has_many :channels, through: :discussuions
+  has_many :channels, through: :discussions
 
 end

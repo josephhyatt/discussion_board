@@ -4,6 +4,10 @@ module ApplicationHelper
   # render_strip is a plugin that strips markdown from
   # a field of text on the index (the root) page
   require 'redcarpet/render_strip'
+
+  def has_role?(role)
+    current_user && current_user.has_role?(role)
+  end
   # class that uses the coderay gem that inherits from redcarpet
   class CodeRayify < Redcarpet::Render::HTML
     # block code method, passing in code and language

@@ -14,28 +14,31 @@
           <!-- shows the username and the time they replied -->
           <strong><%= reply.user.username %></strong> <small><%= time_ago_in_words(reply.created_at) %></small>
           <br/>
+          <!-- show markdown on replies -->
           <%= markdown(reply.reply) %>
         </p>
       </div>
-      <% if reply_author(reply) || has_role?(:admin) %>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a class="level-item">
-            <!-- getting the reply discussion i.d. of user allowing them to edit their own reply -->
-            <%= link_to edit_discussion_reply_path(reply.discussion, reply) do %>
-            <span class="icon is-small"><i class="fa fa-pencil"></i></span>
-            <% end %>
-          </a>
-          <a class="level-item">
-            <!-- passing an array requiring both reply and discussion i.d. in order to know where
-            to look in the database for a user to delete their reply -->
-            <%= link_to [reply.discussion, reply],
+      <!-- checks that the user is the author of the reply
+      and if true shows the icons for user to edit/delete reply -->
+      <% if reply_author(reply) %>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <a class="level-item">
+              <!-- getting the reply discussion i.d. of user allowing them to edit their own reply -->
+              <%= link_to edit_discussion_reply_path(reply.discussion, reply) do %>
+                <span class="icon is-small"><i class="fa fa-pencil"></i></span>
+              <% end %>
+            </a>
+            <a class="level-item">
+              <!-- passing an array requiring both reply and discussion i.d. in order to know where
+              to look in the database for a user to delete their reply -->
+              <%= link_to [reply.discussion, reply],
                 method: :delete, data: {confirm: "Are you sure ?" } do %>
-            <span class="icon is-small"><i class="fa fa-trash-o"></i></span>
-            <% end %>
-          </a>
-        </div>
-      </nav>
+                <span class="icon is-small"><i class="fa fa-trash-o"></i></span>
+              <% end %>
+            </a>
+          </div>
+        </nav>
       <% end %>
     </div>
   </article>

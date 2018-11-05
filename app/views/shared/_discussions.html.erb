@@ -32,8 +32,9 @@
             </p>
           </div>
         </div>
-        <!-- only display if user is admin -->
-        <% if current_user && current_user.admin %>
+        <!-- if discussion_author (method made in helpers/discussions_helper.rb)
+        or current user is admin show edit and delete option -->
+        <% if discussion_author(discussion) %>
           <div class="column has-text-right">
             <%= link_to 'Edit', edit_discussion_path(discussion), class:'button' %>
             <%= link_to 'Delete', discussion, method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
