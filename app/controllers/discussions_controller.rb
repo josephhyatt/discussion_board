@@ -38,7 +38,7 @@ class DiscussionsController < ApplicationController
 
   def destroy
     @discussion.destroy
-    redirect_to discussion_path(@discussion), notice: 'Discussion was successfully destroyed.'
+    redirect_to discussions_path(@discussion), notice: 'Discussion was successfully destroyed.'
   end
 
   private

@@ -47,17 +47,11 @@ class RepliesController < ApplicationController
 
   def update
     @reply = @discussion.replies.find(params[:id])
-
-    respond_to do |format|
-      # if the reply updates we pass in the reply_params method below under private
-      if @reply.update(reply_params)
-        # redirect to discussion_path and pass in @discussion which
-        # grabs the discussion_id, using the set_discussion method below private
-        format.html { redirect_to discussion_path(@discussion), notice: 'Reply was sucessfully updated.' }
-      else
-        format.html { render :edit }
-        format.json { render json: @reply.errors, status: :unprocessable_entity }
-      end
+    # if the reply updates we pass in the reply_params method below under private
+    if @reply.update(reply_params)
+      redirect_to discussions_path(@discussion)
+    else
+      render 'edit'
     end
   end
 

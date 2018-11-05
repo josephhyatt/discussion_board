@@ -17,7 +17,7 @@
           <% end %>
           <div class="content">
             <!-- cut off string and strips markdown if content is 140 or above -->
-            <%= truncate(strip_markdown(discussion.content), length: 140) %>
+            <%= truncate(strip_markdown(discussion.content), length: 160) %>
             <!-- link_to that channel. messed up here, im linking to the channel
             but its also called channel in the database, change to channel_name  -->
             <p><em><small>Posted <%= time_ago_in_words(discussion.created_at) %> ago in

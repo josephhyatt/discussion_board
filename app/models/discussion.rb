@@ -10,4 +10,12 @@ class Discussion < ApplicationRecord
   # applies roles using rolify gem
   # adds ability to add admin privileges to model
   resourcify
+
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders]
+
+  def generate_new_friendly_id?
+    title_changed?
+  end
+
 end
