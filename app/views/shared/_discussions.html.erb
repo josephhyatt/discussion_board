@@ -1,5 +1,5 @@
 <div class="column is-8">
-  <h3 class="title is-5 has-text-grey-light">Latest Discussions</h3>
+  <h3 class="title is-5 has-text-black">Latest Discussions</h3>
   <div class="discussions">
     <!-- loop through each discussions in the discussion_controller.rb index method.
     discussion is a variable to use throughout this file -->
@@ -13,7 +13,7 @@
           <!-- links to discussion variable called above
           loops through discussion titles and output 5 -->
           <%= link_to discussion do %>
-            <h3 class="title is-5"><%= discussion.title %></h3>
+            <h3 class="title is-4 has-text-link"><%= discussion.title %></h3>
           <% end %>
           <div class="content">
             <!-- cut off string and strips markdown if content is 140 or above -->
@@ -30,17 +30,16 @@
               </small>
               </em>
             </p>
+            <!-- if discussion_author (method made in helpers/discussions_helper.rb)
+            or current user is admin show edit and delete option -->
+            <% if discussion_author(discussion) || has_role?(:admin) %>
+              <div class="column has-text-left">
+                <%= link_to 'Edit', edit_discussion_path(discussion), id: "pri-btn-hov", class:'button is-primary has-text-black' %>
+                <%= link_to 'Delete', discussion, method: :delete, data: { confirm: 'Are you sure?' }, class: "button is-danger has-text-black" %>
+              </div>
+            <% end %>
           </div>
         </div>
-        <!-- if discussion_author (method made in helpers/discussions_helper.rb)
-        or current user is admin show edit and delete option -->
-        <% if discussion_author(discussion) || has_role?(:admin) %>
-          <div class="column has-text-right">
-            <%= link_to 'Edit', edit_discussion_path(discussion), class:'button' %>
-            <%= link_to 'Delete', discussion, method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
-          </div>
-        <% end %>
-
       </div>
     <% end %>
   </div>

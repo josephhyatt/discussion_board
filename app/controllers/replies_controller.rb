@@ -3,6 +3,18 @@ class RepliesController < ApplicationController
   before_action :set_reply, only: [:edit, :update, :show, :destroy]
   before_action :set_discussion, only: [:create, :edit, :show, :update, :destroy]
 
+  def new
+  end
+
+  def edit
+    # finds the discussion i.d. youre wanting to edit
+    @discussion = Discussion.find(params[:discussion_id])
+    # corresponds to the discussion i.d. finding
+    # all replys then finds the one that associates
+    # itself with the current i.d.
+    @reply = @discussion.replies.find(params[:id])
+  end
+
   def create
     # find reply on discussion through discussion i.d. in set_discussion
     # using the replies create method passing in params of reply and permitting it
@@ -23,8 +35,14 @@ class RepliesController < ApplicationController
     end
   end
 
-
-  def new
+  def update
+    @reply = @discussion.replies.find(params[:id])
+    # if the reply updates we pass in the reply_params method below under private
+    if @reply.update(reply_params)
+      redirect_to discussions_path(@discussion)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
@@ -34,25 +52,6 @@ class RepliesController < ApplicationController
     @reply.destroy
     # redirect to discussion_path passing in @discussion
     redirect_to discussion_path(@discussion)
-  end
-
-  def edit
-    # finds the discussion i.d. youre wanting to edit
-    @discussion = Discussion.find(params[:discussion_id])
-    # corresponds to the discussion i.d. finding
-    # all replys then finds the one that associates
-    # itself with the current i.d.
-    @reply = @discussion.replies.find(params[:id])
-  end
-
-  def update
-    @reply = @discussion.replies.find(params[:id])
-    # if the reply updates we pass in the reply_params method below under private
-    if @reply.update(reply_params)
-      redirect_to discussions_path(@discussion)
-    else
-      render 'edit'
-    end
   end
 
   private

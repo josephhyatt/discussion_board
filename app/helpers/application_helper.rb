@@ -20,7 +20,7 @@ module ApplicationHelper
     # using the CodeRayify class we just definded creating a new act method
     # were going to filter_html (hash rocket) to true
     # hard_wrap (hash rocket) to true
-    coderayified = CodeRayify.new(:filter_html => true, :hard_wrap => true)
+    coderayified = CodeRayify.new(:filter_html => true, :hard_wrap => true, :smartypants => true)
     # definding markdown options
     options = {
       fenced_code_blocks: true,

@@ -1,7 +1,7 @@
 <!-- the sidebar is compromised of a list of all our channels.
 if youre an admin then display a 'New Channel' button -->
 <div class="column is-3 is-offset-1">
-  <h3 class="title is-5 has-text-grey-light">Channels</h3>
+  <h3 class="title is-5 has-text-black">Channels</h3>
 
   <ul class="menu-list">
     <% @channels.each do |c| %>
@@ -12,8 +12,10 @@ if youre an admin then display a 'New Channel' button -->
   <br/>
 
   <!-- if user is admin then show New Channel button -->
+  <div class="buttons">
   <% if has_role?(:admin) %>
-    <%= link_to 'New Channel', new_channel_path, class:'button is-info' %>
+    <%= link_to 'New Channel', new_channel_path, class:'button is-dark has-text-white' %>
+    <%= link_to 'Edit Channels', channels_path, class:'button is-dark has-text-white edit-channel-button' %>
   <% end %>
-
+</div>
 </div>

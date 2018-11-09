@@ -16,6 +16,44 @@
 
 @import "bulma";
 @import "functions";
+//background image
+html {
+  background: url(bg-img.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.nav-bar-opacity {
+  opacity: .7;
+}
+
+.box {
+  background: #B4C3A1 !important;
+  opacity: .7;
+}
+
+.button {
+  border-radius: 50px;
+}
+.button:hover {
+  padding: 1px 10px;
+  border: 5px solid white;
+  transition: border 0.9s ease;
+
+}
+
+a:hover {
+  color: black;
+}
+
+.icon:hover {
+  transform: scale(2);
+}
+.container {
+  font-family: 'Fira Mono', monospace;
+}
 
 .image {
   border-radius: 50%;
@@ -29,13 +67,34 @@
   margin-bottom: 0;
 }
 
+.input {
+font-family: 'Fira Mono', monospace;
+font-size: 1rem;
+font-weight: 700;
+padding: 1rem;
+background: #B4C3A1;
+opacity: .6;
+}
+
 .textarea {
   height: 250px;
-  font-family: Monaco, san-serif;
-  font-size: .9rem;
+  font-family: 'Fira Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
   padding: 1rem;
+  background: #B4C3A1;
+  opacity: .6;
 }
 
 .discussion-title {
   margin-bottom: 0;
+}
+
+.reply-margin {
+  margin-top: 20px;
+}
+
+.edit-delete-icons {
+  margin: 5px;
+  padding-top: 10px;
 }
